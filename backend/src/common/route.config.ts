@@ -1,12 +1,15 @@
-import { Application } from "express";
+import { Application, Router } from "express";
 
 export abstract class RouteConfig {
 	app: Application
 	name: string
+	router: Router
 
 	constructor(app: Application, name: string) {
 		this.app = app
 		this.name = name
+		this.router = Router()
+		this.registerRoute()
 		this.configureRoutes()
 	}
 
@@ -14,5 +17,6 @@ export abstract class RouteConfig {
 		return this.name
 	}
 
-	abstract configureRoutes(): Application
+	abstract registerRoute(): Application
+	abstract configureRoutes(): void
 }
