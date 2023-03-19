@@ -37,7 +37,7 @@
     "morgan": "^1.10.0",
     "mysql2": "^3.2.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.12",
+    "typeorm": "0.3.13-dev.58fc088",
     "uuid": "^9.0.0",
     "winston": "^3.8.2"
   }
