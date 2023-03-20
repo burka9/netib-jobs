@@ -7,6 +7,8 @@ import { SERVER } from './common/env'
 import logger from './common/logger'
 import { RouteConfig } from './common/route.config'
 import { errorHandler } from './middleware'
+import { Database } from './database'
+import { TelegramRoutes } from './routes/telegram'
 
 const routes: Array<RouteConfig> = []
 
@@ -24,11 +26,23 @@ app.use(morgan('combined', {
 		},
 	}
 }))
+
+
+// routes configuration
+routes.push(new TelegramRoutes(app))
 app.use(errorHandler)
 
 
 
 // database configuration
+Database.initialize()
+	.then(() => {
+		logger.info('database connected')
+	})
+	.catch(err => {
+		logger.error(err.toString())
+		logger.error('database connection failed')
+	})
 
 
 

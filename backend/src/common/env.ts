@@ -33,8 +33,16 @@ function getDatabaseLogs(): LoggerOptions {
 	return (logs || defaultLogs) as LoggerOptions
 }
 
+export type CustomDatabaseType = 'mysql' | 'mariadb' | 'postgres'
+
+function getDatabaseType(): CustomDatabaseType {
+	const types = ['mysql', 'mariadb', 'postgres']
+
+	return (types.find(type => type === process.env.DB_TYPE) || types[0]) as CustomDatabaseType
+}
+
 export const DATABASE = {
-	TYPE: process.env.DB_TYPE || 'mysql',
+	TYPE: getDatabaseType(),
 	HOST: process.env.DB_HOST || 'localhost',
 	PORT: Number(process.env.DB_PORT || '3306'),
 	NAME: base64ToString(process.env.DB_NAME || 'bmV0aWJfam9icw=='),
