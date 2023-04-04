@@ -1,8 +1,9 @@
 import axios from "axios";
 import { Router } from "express";
-import { DEVELOPMENT, WEBHOOK } from "./env";
-import fetch from "./fetch";
-import logger from "./logger";
+import { DEVELOPMENT, WEBHOOK } from "./common/env";
+import logger from "./common/logger";
+import controller from "./controller";
+import response from "./response";
 
 let webhook: string
 
@@ -19,7 +20,7 @@ async function setWebhookURL() {
 	webhook = origin.concat(WEBHOOK.HREF)
 
 	try {
-		let result = await fetch('setWebhook', 'POST', { url: webhook })
+		let result = await response('setWebhook', 'POST', { url: webhook })
 		logger.debug(result.data.description)
 	} catch(err: any) {
 		logger.info('failed to set webhook')
@@ -41,9 +42,9 @@ export async function initializeBot(router: Router) {
 	// await getWebhookURL()
 
 	// await incoming requests
-	router.post(WEBHOOK.HREF, (req, res) => {
+	router.post(WEBHOOK.HREF, async (req, res) => {
 		logger.debug(`incoming requeset`)
-		console.log(req.body)
+		await controller(req.body)
 		res.end()
 	})
 

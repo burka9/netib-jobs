@@ -3,10 +3,10 @@ import express, { Router } from "express"
 import helmet from "helmet"
 import cors from "cors"
 import morgan from "morgan"
-import logger from "./logger"
-import { ENVIRONMENT, SERVER } from "./env"
-import { errorHandler } from "./middleware"
-import { initializeBot } from "./bot"
+import logger from "./common/logger"
+import { ENVIRONMENT, SERVER, TELEGRAM, WEBHOOK } from "./common/env"
+import { errorHandler, getUserInfo } from "./common/middleware"
+import { initializeBot } from "./telegram"
 
 
 const app = express()
@@ -25,6 +25,7 @@ app.use(morgan('combined', {
 }))
 
 app.use(errorHandler)
+app.use(getUserInfo)
 app.use('/', router)
 
 
