@@ -29,5 +29,9 @@ export const TELEGRAM = {
 }
 
 export const BACKEND = {
-	URL: process.env.BACKEND_SERVER_URL || 'http://localhost:3000'
+	URL: process.env.BACKEND_SERVER_URL || 'http://localhost:3000',
+	ORIGIN: process.env.BACKEND_SERVER_ORIGIN || 'http://localhost',
+	PORT: Number(process.env.BACKEND_SERVER_PORT) || 3000
 }
+
+export const TUNNEL = process.env.TUNNEL || 'localtunnel'
