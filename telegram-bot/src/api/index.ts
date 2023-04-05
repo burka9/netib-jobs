@@ -63,3 +63,7 @@ export async function apiDeleteRequest(
 	endpoint = endpoint.startsWith('/') ? endpoint.substring(1) : endpoint
 	return (await apiRequest(`/telegram/${chatID}/${endpoint}`, 'DELETE', data, params, headers)).data
 }
+
+export async function updateLastMessageID(chatID: number, message_id: number): Promise<any> {
+	return (await apiPostRequest('update-last-message-id', chatID, { message_id })).data
+}

@@ -1,8 +1,13 @@
 import { Update } from "node-telegram-bot-api";
-import Message from './message'
+import Message from "./message";
+import { _user } from "../interface/api";
+import CallbackQuery from "./callback.query";
 
-export default async function(update: Update) {
-	const { message, update_id } = update
+export default async function(user: _user, update: Update) {
+	const { message, callback_query, update_id } = update
 
-	if (message) return Message(message, update_id)
+	// console.log(update)
+
+	if (message) return Message(user, message, update_id)
+	else if (callback_query) return CallbackQuery(user, callback_query, update_id)
 }

@@ -22,17 +22,20 @@ export async function getUserInfo(req: Request, res: Response, next: NextFunctio
 
 		if (user) { // user is registered
 			logger.debug(`user ${chatID} is registered`)
+			res.locals.user = user
 		} else { // user is not registered
 			logger.debug(`user ${chatID} is not registered`)
-			let { success } = await apiPostRequest('register-user', chatID, {
+			let { user, success } = await apiPostRequest('register-user', chatID, {
 				chat_id: chatID,
 				first_name: (update.message?.chat.first_name || update.callback_query?.from.first_name),
-				username: (update.message?.chat.username || update.callback_query?.from.username)
+				username: (update.message?.chat.username || update.callback_query?.from.username),
+				last_name: (update.message?.chat.last_name || update.callback_query?.from.last_name),
 			})
 
+			res.locals.user = user
 			logger.debug(`user registered: ${success}`)
 		}
-		
+
 	} catch {
 	}
 

@@ -26,12 +26,18 @@ export const WEBHOOK = {
 export const TELEGRAM = {
 	API: process.env.TELEGRAM_URL || 'https://api.telegram.org',
 	BOT_TOKEN: process.env.BOT_TOKEN || '',
+	CHANNEL: process.env.TELEGRAM_CHANNEL_URL || 'https://t.me/netibprofessionals',
+	AGREEMENT_LINK: process.env.NETIB_JOBS_AGREEMENT_LINK || 'https://telegra.ph/Talent-12-07',
 }
 
 export const BACKEND = {
 	URL: process.env.BACKEND_SERVER_URL || 'http://localhost:3000',
 	ORIGIN: process.env.BACKEND_SERVER_ORIGIN || 'http://localhost',
 	PORT: Number(process.env.BACKEND_SERVER_PORT) || 3000
+}
+
+export const WEBSITE = {
+	URL: process.env.WEBSITE_URL || 'https://netibjobs.com'
 }
 
 export const TUNNEL = process.env.TUNNEL || 'localtunnel'
