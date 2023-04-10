@@ -27,7 +27,7 @@ export const TELEGRAM = {
 	API: process.env.TELEGRAM_URL || 'https://api.telegram.org',
 	BOT_TOKEN: process.env.BOT_TOKEN || '',
 	CHANNEL: process.env.TELEGRAM_CHANNEL_URL || 'https://t.me/netibprofessionals',
-	AGREEMENT_LINK: process.env.NETIB_JOBS_AGREEMENT_LINK || 'https://telegra.ph/Talent-12-07',
+	AGREEMENT_LINK: process.env.TELEGRAM_AGREEMENT_LINK || 'https://telegra.ph/TERM-AND-CONDITIONS-04-05',
 }
 
 export const BACKEND = {

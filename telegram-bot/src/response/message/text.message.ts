@@ -1,6 +1,6 @@
-import { Message } from "node-telegram-bot-api"
+import { EditMessageReplyMarkupOptions, Message } from "node-telegram-bot-api"
 import response from ".."
-import { CustomDeleteMessageOptions, CustomEditMessageOptions, CustomSendMessageOptions } from "../../interface"
+import { CustomDeleteMessageOptions, CustomEditMessageOptions, CustomEditMessageReplyMarkupOptions, CustomSendMessageOptions } from "../../interface"
 import { updateLastMessageID } from "../../api"
 
 export const sendTextMessage = async (sendMessageOptions: CustomSendMessageOptions, updateLastMessage = true): Promise<Message> => {
@@ -26,6 +26,10 @@ export const sendTextMessageAndRemoveKeyboard = async (
 
 export const editTextMessage = async (editMessageOptions: CustomEditMessageOptions): Promise<any> => {
 	return response('editMessageText', 'POST', editMessageOptions)
+}
+
+export const editMessageReplyMarkup = async (editMessageReplyMarkupOptions: CustomEditMessageReplyMarkupOptions): Promise<any> => {
+	return response('editMessageReplyMarkup', 'POST', editMessageReplyMarkupOptions)
 }
 
 export const deleteMessage = async (deleteMessageOptions: CustomDeleteMessageOptions): Promise<any> => {

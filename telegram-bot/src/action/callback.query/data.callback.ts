@@ -1,11 +1,13 @@
 import { CallbackQuery, Message, User } from "node-telegram-bot-api";
 import { _user } from "../../interface/api";
 import logger from "../../common/logger";
-import { MainMenuFromViewJobs, ViewJobsMainMenu } from "../../response/markup/inline.button";
-import { editTextMessage } from "../../response/message/text.message";
-import { viewJobsInlineKeyboard } from "../../response/markup/inline.keyboard";
-import { editWelcomeMessage } from "../../response/common/welcome.message";
-import { emptyAnswerCallbackQuery } from "../../response/callback.query/data.callback";
+import { AcceptTerms, DeclineTerms, MainMenu, MyJobsMainMenu, ViewJobsMainMenu } from "../../response/markup/inline.button";
+import viewJobsMainMenuAction from "./map.data.action/viewJobsMainMenuAction";
+import myJobsMainMenuAction from "./map.data.action/myJobsMainMenuAction";
+import acceptTermsAction from "./map.data.action/acceptTermsAction";
+import declineTermsAction from "./map.data.action/declineTermsAction";
+import mainMenuAction from "./map.data.action/MainMenuFromMyJobsAction";
+
 
 interface CallbackAction {
 	[key: string]: (
@@ -18,29 +20,11 @@ interface CallbackAction {
 }
 
 const callbackAction: CallbackAction = {
-	[ViewJobsMainMenu.callback_data as string]: async (
-		user: _user,
-		from: User,
-		callback_query: CallbackQuery,
-		message: Message,
-		update_id?: number
-	) => {
-		await editTextMessage({
-			chat_id: from.id,
-			message_id: message.message_id,
-			text: `You can view jobs using our telegram channel or our website.`,
-			reply_markup: viewJobsInlineKeyboard
-		})
-	},
-	[MainMenuFromViewJobs.callback_data as string]: async (
-		user: _user,
-		from: User,
-		callback_query: CallbackQuery,
-		message: Message,
-		update_id?: number
-	) => {
-		await editWelcomeMessage(message.chat, message.message_id)
-	}
+	[MainMenu.callback_data as string]: mainMenuAction,
+	[ViewJobsMainMenu.callback_data as string]: viewJobsMainMenuAction,
+	[MyJobsMainMenu.callback_data as string]: myJobsMainMenuAction,
+	[AcceptTerms.callback_data as string]: acceptTermsAction,
+	[DeclineTerms.callback_data as string]: declineTermsAction,
 }
 
 const defaultCallbackAction = async (
@@ -53,9 +37,6 @@ const defaultCallbackAction = async (
 ) => {
 	logger.debug(`unknow callback data: ${data}`)
 	// handle text messages based on telegram flow
-
-	// send empty answer to callback query
-	await emptyAnswerCallbackQuery(callback_query.id)
 }
 
 export const defaultAction = defaultCallbackAction

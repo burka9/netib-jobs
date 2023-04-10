@@ -3,7 +3,7 @@ import logger from "./logger"
 import { apiGetRequest, apiPostRequest } from "../api"
 import { Update } from "node-telegram-bot-api"
 
-export function errorHandler(error: Error, req: Request, res: Response, next: NextFunction) {
+export async function errorHandler(error: Error, req: Request, res: Response, next: NextFunction) {
 	logger.error(error.message)
 	if (error.name === 'QueryFailedError') {
 		return res.status(400).json({ message: 'Bad Request', code: (error as any).code })
@@ -25,13 +25,14 @@ export async function getUserInfo(req: Request, res: Response, next: NextFunctio
 			res.locals.user = user
 		} else { // user is not registered
 			logger.debug(`user ${chatID} is not registered`)
-			let { user, success } = await apiPostRequest('register-user', chatID, {
+			let { success } = await apiPostRequest('register-user', chatID, {
 				chat_id: chatID,
 				first_name: (update.message?.chat.first_name || update.callback_query?.from.first_name),
 				username: (update.message?.chat.username || update.callback_query?.from.username),
 				last_name: (update.message?.chat.last_name || update.callback_query?.from.last_name),
 			})
 
+			const { user } = await apiGetRequest(`user-info`, chatID)
 			res.locals.user = user
 			logger.debug(`user registered: ${success}`)
 		}

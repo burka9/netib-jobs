@@ -1,28 +1,18 @@
 import { Chat, Message } from "node-telegram-bot-api";
 import logger from "../../common/logger";
-import { _user } from "../../interface/api";
+import { TelegramStep, _user } from "../../interface/api";
 import { welcomeMessage } from "../../response/common/welcome.message";
 import { deleteMessage, sendTextMessage } from "../../response/message/text.message";
 import { sharePhoneNumberMarkup } from "../../response/markup";
+import start from "./map.text/start";
+import addPersonalEmail from "./map.text/addPersonalEmail";
 
 interface TextMessageAction {
-	[key: string]: (user: _user, chat: Chat, message?: Message, update_id?: number) => Promise<void>;
+	[key: string]: (user: _user, chat: Chat, message: Message, update_id?: number) => Promise<void>;
 }
 
 const textMessageAction: TextMessageAction = {
-	'/start': async (user: _user, chat: Chat, message?: Message, update_id?: number) => {
-		if (user.phone === null) {
-			// prompt phone
-			await sendTextMessage({
-				chat_id: chat.id,
-				text: `Share your phone number using the button below 👇👇`,
-				reply_markup: sharePhoneNumberMarkup
-			})
-		} else {
-			// show welcome message
-			await welcomeMessage(chat)
-		}
-	}
+	'/start': start,
 }
 
 const defaultTextMessageAction = async (
@@ -34,12 +24,17 @@ const defaultTextMessageAction = async (
 ) => {
 	logger.debug(`unknow text message: ${text}`)
 	// handle text messages based on telegram flow
-
-	// delete message
-	await deleteMessage({
-		chat_id: chat.id,
-		message_id: message?.message_id
-	})
+	switch (user.telegram.step) {
+		case TelegramStep.WaitingPersonalEmail:
+			await addPersonalEmail(user, text, chat, message, update_id)
+			break
+		default:
+			// delete message
+			await deleteMessage({
+				chat_id: chat.id,
+				message_id: message?.message_id
+			})
+	}
 }
 
 export const defaultAction = defaultTextMessageAction

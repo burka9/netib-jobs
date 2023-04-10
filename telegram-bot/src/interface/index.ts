@@ -1,4 +1,4 @@
-import { ForceReply, InlineKeyboardMarkup, MessageEntity, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove, SendMessageOptions } from "node-telegram-bot-api";
+import { EditMessageReplyMarkupOptions, ForceReply, InlineKeyboardMarkup, MessageEntity, ParseMode, ReplyKeyboardMarkup, ReplyKeyboardRemove, SendMessageOptions } from "node-telegram-bot-api";
 
 export interface CustomSendMessageOptions {
 	chat_id: string | number;
@@ -28,4 +28,8 @@ export interface CustomEditMessageOptions {
 export interface CustomDeleteMessageOptions {
 	chat_id: number | string;
 	message_id: number;
+}
+
+export interface CustomEditMessageReplyMarkupOptions extends EditMessageReplyMarkupOptions {
+	reply_markup?: InlineKeyboardMarkup;
 }
