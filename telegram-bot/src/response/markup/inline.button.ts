@@ -16,6 +16,11 @@ export const MyJobsMainMenu: InlineKeyboardButton = {
 	callback_data: 'my-jobs-main-menu'
 }
 
+export const BackToMyJobs: InlineKeyboardButton = {
+	text: 'Back',
+	callback_data: 'my-jobs-main-menu'
+}
+
 export const ViewJobsFromTelegram: InlineKeyboardButton = {
 	text: 'Telegram Channel',
 	url: TELEGRAM.CHANNEL
@@ -41,7 +46,7 @@ export const PostJob: InlineKeyboardButton = {
 	callback_data: 'post-job'
 }
 
-export const MyCompanies: InlineKeyboardButton = {
+export const MyCompany: InlineKeyboardButton = {
 	text: 'My Company',
 	callback_data: 'my-company'
 }
@@ -57,6 +62,55 @@ export const AcceptedJobs: InlineKeyboardButton = {
 }
 
 export const DeclinedJobs: InlineKeyboardButton = {
-	text: 'DeclinedJobs',
+	text: 'Declined Jobs',
 	callback_data: 'declined-jobs'
 }
+
+export const AddCompany: InlineKeyboardButton = {
+	text: 'Add Company',
+	callback_data: 'add-company'
+}
+
+export const ConfirmTemporaryCompany: InlineKeyboardButton = {
+	text: 'Confirm',
+	callback_data: 'confirm-temporary-company'
+}
+
+export const EditTemporaryCompany: InlineKeyboardButton = {
+	text: 'Edit',
+	callback_data: 'edit-temporary-company'
+}
+
+export const CancelTemporaryCompany: InlineKeyboardButton = {
+	text: 'Cancel',
+	callback_data: 'cancel-temporary-company'
+}
+
+export const CompanyButton = (id: number, name: string): InlineKeyboardButton => ({
+	text: name,
+	callback_data: `company-view-${id}`
+})
+
+export const EditCompany = (id: number): InlineKeyboardButton => ({
+	text: 'Edit',
+	callback_data: `company-edit-${id}`
+})
+export type EditTypeAttribute = 'name' | 'description' | 'employeeCount' | 'sector' | 'location' | 'email' | 'phone' | 'website'
+export const EditCompanyAttribute = (id: number, key: EditTypeAttribute): InlineKeyboardButton => ({
+	text: key === 'employeeCount' ? 'Employee Count' : key[0].toUpperCase().concat(key.substring(1)),
+	callback_data: `company-edit-${id}-${key}`
+})
+export const BackToEditCompany = (id: number, text = 'Back'): InlineKeyboardButton => ({
+	text,
+	callback_data: `company-edit-${id}`
+})
+
+export const DeleteCompany = (id: number): InlineKeyboardButton => ({
+	text: 'Delete',
+	callback_data: `company-delete-${id}`
+})
+
+export const BackToMyCompany = {
+	text: 'Back',
+	callback_data: 'my-company'
+} as InlineKeyboardButton

@@ -41,3 +41,7 @@ export const WEBSITE = {
 }
 
 export const TUNNEL = process.env.TUNNEL || 'localtunnel'
+
+export const PHONE = {
+	FORMAT: process.env.PHONE_FORMAT || "/^(\\+2519\\d{8}|09\\d{8}|\\+2517\\d{8}|07\\d{8})$/"
+}

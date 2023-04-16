@@ -19,6 +19,7 @@
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.15.0",
     "@types/node-telegram-bot-api": "^0.61.6",
+    "@types/valid-url": "^1.0.4",
     "nodemon": "^2.0.21",
     "standard-version": "^9.5.0",
     "ts-node": "^10.9.1",
@@ -34,6 +35,7 @@
     "localtunnel": "^2.0.2",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
+    "valid-url": "^1.0.9",
     "winston": "^3.8.2"
   }
 }

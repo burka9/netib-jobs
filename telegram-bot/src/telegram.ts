@@ -41,7 +41,11 @@ export async function initializeBot(router: Router) {
 	// await incoming requests
 	router.post(WEBHOOK.HREF, async (req, res) => {
 		logger.debug(`incoming requeset`)
-		await controller(res.locals.user, req.body)
+		
+		if (res.locals.user) {
+			await controller(res.locals.user, req.body)
+		}
+
 		res.end()
 	})
 

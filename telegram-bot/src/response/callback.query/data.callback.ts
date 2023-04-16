@@ -4,5 +4,8 @@ import response from ".."
 export const emptyAnswerCallbackQuery = async (callback_query_id: string): Promise<any> => {
 	const options: AnswerCallbackQueryOptions = { callback_query_id }
 
-	return response('answerCallbackQuery', 'POST', options)
+	try {
+		await response('answerCallbackQuery', 'POST', options)
+	} catch {
+	}
 }

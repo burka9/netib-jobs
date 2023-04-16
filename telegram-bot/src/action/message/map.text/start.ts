@@ -4,6 +4,7 @@ import { welcomeMessage } from "../../../response/common/welcome.message"
 import { sharePhoneNumberMarkup } from "../../../response/markup"
 import { sendTextMessage } from "../../../response/message/text.message"
 
+
 export default async (user: _user, chat: Chat, message: Message, update_id?: number) => {
 	if (user.phone === null) {
 		// prompt phone

@@ -1,24 +1,36 @@
-import { InlineKeyboardMarkup } from "node-telegram-bot-api";
+import { InlineKeyboardMarkup, KeyboardButton } from "node-telegram-bot-api";
 import {
 	ViewJobsMainMenu,
-	MyJobsMainMenu,
 	AcceptTerms,
 	DeclineTerms,
 	PostJob,
-	MyCompanies,
+	MyCompany,
 	AcceptedJobs,
 	DeclinedJobs,
 	PendingJobs,
-	MainMenu
+	MainMenu,
+	AddCompany,
+	ConfirmTemporaryCompany,
+	EditTemporaryCompany,
+	CancelTemporaryCompany,
+	BackToMyJobs,
+	MyJobsMainMenu,
+	EditCompany,
+	DeleteCompany,
+	BackToMyCompany,
+	CompanyButton,
+	EditCompanyAttribute,
+	BackToEditCompany
 } from "./inline.button";
 import { ViewJobsFromTelegram } from "./inline.button";
 import { ViewJobsFromWebsite } from "./inline.button";
+import { _user } from "../../interface/api";
 
 export const mainMenuInlineKeyboard = {
 	inline_keyboard: [
 		[
 			ViewJobsMainMenu,
-			MyJobsMainMenu,
+			MyJobsMainMenu
 		]
 	]
 } as InlineKeyboardMarkup
@@ -39,7 +51,7 @@ export const termsAndConditionInlineKeyboard = {
 
 export const myJobsInlineKeyboard = {
 	inline_keyboard: [
-		[PostJob, MyCompanies],
+		[PostJob, MyCompany],
 		[AcceptedJobs, PendingJobs],
 		[DeclinedJobs, MainMenu]
 	]
@@ -50,3 +62,55 @@ export const sharePersoanlEmailInlineKeyboard = {
 		[MainMenu]
 	]
 } as InlineKeyboardMarkup
+
+export const MyCompanyInlineKeyboard = (user: _user) => {
+	if (!user) return
+	
+	const companies = user.companies.map(u => [CompanyButton(u.id, u.name)])
+	
+	const inline_keyboard: KeyboardButton[][] = [
+		...companies
+	]
+
+	if (companies.length < 3) inline_keyboard.push(
+		[AddCompany]
+	)
+
+	inline_keyboard.push(
+		[BackToMyJobs, MainMenu]
+	)
+	
+	return { inline_keyboard } as InlineKeyboardMarkup
+}
+
+export const ViewTemporaryCompanyInlineKeyboard = {
+	inline_keyboard: [
+		// [ConfirmTemporaryCompany, EditTemporaryCompany],
+		[ConfirmTemporaryCompany],
+		[CancelTemporaryCompany]
+	]
+} as InlineKeyboardMarkup
+
+export const ViewCompanyInlineKeyboard = (id: number): InlineKeyboardMarkup => ({
+	inline_keyboard: [
+		// edit, delete, back, main menu
+		[EditCompany(id), DeleteCompany(id)],
+		[BackToMyCompany, MainMenu]
+	]
+})
+
+export const EditCompanyInlineKeyboard = (id: number): InlineKeyboardMarkup => ({
+	inline_keyboard: [
+		[EditCompanyAttribute(id, 'name'), EditCompanyAttribute(id, 'description')],
+		[EditCompanyAttribute(id, 'sector'), EditCompanyAttribute(id, 'employeeCount')],
+		[EditCompanyAttribute(id, 'location'), EditCompanyAttribute(id, 'phone')],
+		[EditCompanyAttribute(id, 'email'), EditCompanyAttribute(id, 'website')],
+		[CompanyButton(id, 'Back'), MainMenu]
+	]
+})
+
+export const CancelEditCompanyAttribute = (id: number): InlineKeyboardMarkup => ({
+	inline_keyboard: [
+		[BackToEditCompany(id, 'Cancel')]
+	]
+})

@@ -67,3 +67,7 @@ export async function apiDeleteRequest(
 export async function updateLastMessageID(chatID: number, message_id: number): Promise<any> {
 	return (await apiPostRequest('update-last-message-id', chatID, { message_id })).data
 }
+
+export async function updateLastCallbackMessageID(chatID: number, message_id: number): Promise<any> {
+	return (await apiPostRequest('update-last-callback-message-id', chatID, { message_id })).data
+}
