@@ -1,5 +1,5 @@
 import { _user } from "../../interface/api"
-import { skipAndCancelButtonMarkup } from "../markup"
+import { cityKeyboardMarkup, locationKeyboardMarkup, skipAndCancelButtonMarkup } from "../markup"
 import { ViewTemporaryCompanyInlineKeyboard } from "../markup/inline.keyboard"
 import { sendTextMessage } from "../message/text.message"
 
@@ -39,4 +39,16 @@ export const companyWebsite = async (chat_id: number) => sendTextMessage({
 	chat_id,
 	text: `Company Website`,
 	reply_markup: skipAndCancelButtonMarkup
+})
+
+export const tempJobSalary = async (chat_id: number) => sendTextMessage({
+	chat_id,
+	text: `Salary/Compensation`,
+	reply_markup: skipAndCancelButtonMarkup
+})
+
+export const tempJobLocation = async (chat_id: number) => sendTextMessage({
+	chat_id,
+	text: `Job Location`,
+	reply_markup: await locationKeyboardMarkup(chat_id)
 })

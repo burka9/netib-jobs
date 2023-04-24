@@ -1,5 +1,6 @@
 import { InlineKeyboardButton } from "node-telegram-bot-api"
 import { TELEGRAM, WEBSITE } from "../../common/env"
+import { _company } from "../../interface/api"
 
 export const MainMenu: InlineKeyboardButton = {
 	text: 'Main Menu',
@@ -43,6 +44,10 @@ export const DeclineTerms: InlineKeyboardButton = {
 
 export const PostJob: InlineKeyboardButton = {
 	text: 'Post Jobs',
+	callback_data: 'post-job'
+}
+export const BackToPostJob: InlineKeyboardButton = {
+	text: 'Back',
 	callback_data: 'post-job'
 }
 
@@ -114,3 +119,28 @@ export const BackToMyCompany = {
 	text: 'Back',
 	callback_data: 'my-company'
 } as InlineKeyboardButton
+
+export const PostJobAsPrivate = {
+	text: 'Private Client',
+	callback_data: 'post-job-as-private-client'
+} as InlineKeyboardButton
+
+export const PostJobAsCompany = {
+	text: 'Company',
+	callback_data: 'post-job-as-company'
+} as InlineKeyboardButton
+
+export const ConfrimTempJobPost = {
+	text: 'Confirm',
+	callback_data: 'confirm-temp-job-post'
+} as InlineKeyboardButton
+
+export const CancelTempJobPost = {
+	text: 'Cancel',
+	callback_data: 'cancel-temp-job-post'
+} as InlineKeyboardButton
+
+export const PostAsCompanyButton = (company: _company): InlineKeyboardButton => ({
+	text: company.name,
+	callback_data: `company-post-${company.id}`
+})

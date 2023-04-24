@@ -16,6 +16,13 @@ export async function errorHandler(error: Error, req: Request, res: Response, ne
 export async function getUserInfo(req: Request, res: Response, next: NextFunction) {
 	try {
 		const update = req.body as Update
+
+		// only proceed if it is from private chats
+		if (update.message?.chat.type === "private" || update.callback_query?.message?.chat.type === "private") {}
+		else {
+			return res.end()
+		}
+		
 		const chatID = (update.message?.chat.id || update.callback_query?.from.id) as number
 
 		const { user } = await apiGetRequest(`user-info`, chatID)

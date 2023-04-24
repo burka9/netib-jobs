@@ -1,6 +1,6 @@
 import { KeyboardButton, ReplyKeyboardMarkup } from "node-telegram-bot-api";
 import { apiGetRequest } from "../../api";
-import { EmployeeCount, _city, _country, _sector } from "../../interface/api";
+import { EmployeeCount, JobType, _city, _country, _sector } from "../../interface/api";
 
 export const sharePhoneNumberMarkup = {
 	one_time_keyboard: true,
@@ -44,7 +44,7 @@ export const skipAndCancelButtonMarkup = {
 	]
 } as ReplyKeyboardMarkup
 
-const populateKeyboardList = (list: any[], includeCancel = true): KeyboardButton[][] => {
+const populateKeyboardList = (list: any[], includeCancel = true, includeSkip = false): KeyboardButton[][] => {
 	const keyboard: KeyboardButton[][] = []
 
 	list.sort().forEach((item: string) => {
@@ -53,10 +53,15 @@ const populateKeyboardList = (list: any[], includeCancel = true): KeyboardButton
 		])
 	})
 
-	if (includeCancel)
-		keyboard.push([
-			{ text: 'Cancel' }
-		])
+
+	if (includeCancel || includeSkip) {
+		const extra: KeyboardButton[] = []
+
+		if (includeSkip) extra.push({ text: 'Skip' })
+		if (includeCancel) extra.push({ text: 'Cancel' })
+
+		keyboard.push(extra)
+	}
 
 	return keyboard
 }
@@ -116,4 +121,35 @@ export const companySizeKeyboardMarkup = () => {
 	]]
 
 	return markup
+}
+
+export const jobTypeMarkup = (): ReplyKeyboardMarkup => {
+	const markup: ReplyKeyboardMarkup = {
+		resize_keyboard: true,
+		one_time_keyboard: true,
+		keyboard: []
+	}
+
+	for (const item of Object.values(JobType)) {
+		markup.keyboard.push([
+			{ text: item }
+		])
+	}
+
+	return markup
+}
+
+export const locationKeyboardMarkup = async (chat_id: number): Promise<ReplyKeyboardMarkup> => {
+	const { cities } = await apiGetRequest('eth-city-list', chat_id)
+
+	const reply_markup = {
+		one_time_keyboard: true,
+		resize_keyboard: true,
+		keyboard: [
+			[{ text: 'Remote' }],
+			...populateKeyboardList(cities.map((city: _city) => city.name), false)
+		]
+	} as ReplyKeyboardMarkup
+
+	return reply_markup
 }

@@ -28,6 +28,8 @@ export const TELEGRAM = {
 	BOT_TOKEN: process.env.BOT_TOKEN || '',
 	CHANNEL: process.env.TELEGRAM_CHANNEL_URL || 'https://t.me/netibprofessionals',
 	AGREEMENT_LINK: process.env.TELEGRAM_AGREEMENT_LINK || 'https://telegra.ph/TERM-AND-CONDITIONS-04-05',
+	DEV_GROUP_ID: Number(process.env.DEV_GROUP_ID || "-1001552708817"),
+	DEV_ADMIN_ID: Number(process.env.DEV_ADMIN_ID || "411739146"),
 }
 
 export const BACKEND = {

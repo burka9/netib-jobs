@@ -3,7 +3,7 @@ import { TelegramStep, _user } from "../../../../interface/api";
 import { changeTelegramStep } from "../../../../response/common/telegramStep";
 import { editTextMessage } from "../../../../response/message/text.message";
 import { companyDetailText, myCompanyMessage } from "../../../../response/common/company.message";
-import { CancelEditCompanyAttribute, EditCompanyInlineKeyboard } from "../../../../response/markup/inline.keyboard";
+import { CancelEditCompanyAttributeInlineKeyboard, EditCompanyInlineKeyboard } from "../../../../response/markup/inline.keyboard";
 import { EditTypeAttribute } from "../../../../response/markup/inline.button";
 import { apiPostRequest } from "../../../../api";
 
@@ -84,6 +84,6 @@ export default async (
 		chat_id: from.id,
 		message_id: message.message_id,
 		text: replyText,
-		reply_markup: CancelEditCompanyAttribute(id)
+		reply_markup: CancelEditCompanyAttributeInlineKeyboard(id)
 	})
 }

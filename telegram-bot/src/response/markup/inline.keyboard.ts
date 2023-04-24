@@ -20,7 +20,13 @@ import {
 	BackToMyCompany,
 	CompanyButton,
 	EditCompanyAttribute,
-	BackToEditCompany
+	BackToEditCompany,
+	PostJobAsPrivate,
+	PostJobAsCompany,
+	ConfrimTempJobPost,
+	CancelTempJobPost,
+	BackToPostJob,
+	PostAsCompanyButton
 } from "./inline.button";
 import { ViewJobsFromTelegram } from "./inline.button";
 import { ViewJobsFromWebsite } from "./inline.button";
@@ -109,8 +115,37 @@ export const EditCompanyInlineKeyboard = (id: number): InlineKeyboardMarkup => (
 	]
 })
 
-export const CancelEditCompanyAttribute = (id: number): InlineKeyboardMarkup => ({
+export const CancelEditCompanyAttributeInlineKeyboard = (id: number): InlineKeyboardMarkup => ({
 	inline_keyboard: [
 		[BackToEditCompany(id, 'Cancel')]
 	]
 })
+
+export const HowToPostJobInlineKeyboard = {
+	inline_keyboard: [
+		// private client - company
+		// back - main menu
+		[PostJobAsPrivate, PostJobAsCompany],
+		[BackToMyJobs, MainMenu]
+	]
+} as InlineKeyboardMarkup
+
+export const ViewTemporaryJobPostInlineKeyboard = {
+	inline_keyboard: [
+		[ConfrimTempJobPost, CancelTempJobPost],
+	]
+} as InlineKeyboardMarkup
+
+export const PostAsCompanyInlineKeyboard = (user: _user): InlineKeyboardMarkup => {
+	const markup: InlineKeyboardMarkup = {
+		inline_keyboard: []
+	}
+
+	user.companies.forEach(company => markup.inline_keyboard.push([PostAsCompanyButton(company)]))
+
+	markup.inline_keyboard.push(
+		[BackToPostJob, MainMenu]
+	)
+
+	return markup
+}

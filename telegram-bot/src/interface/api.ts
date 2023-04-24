@@ -6,6 +6,7 @@ export interface _user {
 	policy: _user_policy;
 	companies: _company[];
 	temporaryCompany: _temporaryCompany;
+	temporaryJobPost: _temporaryJobPost;
 }
 
 export enum TelegramStep {
@@ -34,6 +35,24 @@ export enum TelegramStep {
   EditCompanyPhone = "EditCompanyPhone",
   EditCompanyEmail = "EditCompanyEmail",
   EditCompanyWebsite = "EditCompanyWebsite",
+
+	PostJob = "PostJob",
+  TempJobTitle = "TempJobTitle",
+  TempJobDescription = "TempJobDescription",
+  TempJobType = "TempJobType",
+  TempJobSector = "TempJobSector",
+  TempJobSalary = "TempJobSalary",
+  TempJobCountry = "TempJobCountry",
+  TempJobCity = "TempJobCity",
+	TempJobLocation = "TempJobLocation",
+  TempJobEmployeeCount = "TempJobEmployeeCount",
+	ViewTempJobPost = "ViewTempJobPost",
+  ConfirmTempJobPost = "ConfirmTempJobPost",
+}
+
+export enum JobType {
+	FullTime = "FullTime",
+	Remote = "Remote"
 }
 
 export interface _user_telegram {
@@ -107,4 +126,32 @@ export interface _city {
 	name: string;
 	country: _country;
 	temporaryCompanies: _temporaryCompany[];
+}
+
+export interface _temporaryJobPost {
+	id: number;
+	companyId: number;
+	title: string;
+	description: string;
+	type: JobType;
+	sector: _sector;
+	salary: number;
+	country: _country;
+	city: _city;
+	location: string;
+	employeeCount: number;
+	owner: _user;
+}
+
+export interface _jobPost {
+	id: number;
+	title: string;
+	description: string;
+	type: JobType;
+	sector: _sector;
+	salary: number;
+	location: string;
+	employeeCount: number;
+	company?: _company | null;
+	owner: _user;
 }
