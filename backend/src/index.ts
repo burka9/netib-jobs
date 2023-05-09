@@ -9,6 +9,7 @@ import { RouteConfig } from './common/route.config'
 import { errorHandler } from './middleware'
 import { Database } from './database'
 import { TelegramRoutes } from './routes/telegram'
+import __dev__ from './__dev__'
 
 const routes: Array<RouteConfig> = []
 
@@ -38,6 +39,7 @@ app.use(errorHandler)
 Database.initialize()
 	.then(() => {
 		logger.info('database connected')
+		__dev__()
 	})
 	.catch(err => {
 		logger.error(err.toString())
