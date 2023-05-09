@@ -94,10 +94,12 @@ const defaultTextMessageAction = async (
 			// dev post end
 			
 			// delete message
-			await deleteMessage({
-				chat_id: chat.id,
-				message_id: message?.message_id
-			})
+			try {
+				await deleteMessage({
+					chat_id: chat.id,
+					message_id: message?.message_id
+				})
+			} catch {}
 	}
 }
 
