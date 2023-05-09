@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { DataSource } from "typeorm";
-import { DATABASE } from "./common/env";
+import { DATABASE, DEVELOPMENT } from "./common/env";
 
 const { TYPE, DROP_SCHEMA, HOST, LOG, MAX_POOL, MIN_POOL, NAME, PASSWORD, PORT, SYNC, USER } = DATABASE
 
@@ -19,6 +19,8 @@ export const Database = new DataSource({
 		connectionLimit: MAX_POOL
 	},
 	entities: [
-		resolve("src/entity/*.entity.ts")
+		DEVELOPMENT
+		? resolve("src/entity/*.entity.ts")
+		: resolve("dist/entity/*.entity.js")
 	],
 })
