@@ -58,8 +58,9 @@ export const termsAndConditionInlineKeyboard = {
 export const myJobsInlineKeyboard = {
 	inline_keyboard: [
 		[PostJob, MyCompany],
-		[AcceptedJobs, PendingJobs],
-		[DeclinedJobs, MainMenu]
+		// [AcceptedJobs, PendingJobs],
+		// [DeclinedJobs, MainMenu]
+		[MainMenu]
 	]
 } as InlineKeyboardMarkup
 

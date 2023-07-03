@@ -9,6 +9,7 @@ export const jobPostDetailText = (jobPost: _temporaryJobPost | _jobPost): string
 		// country,
 		description,
 		employeeCount,
+		howToApply,
 		id,
 		location,
 		owner,
@@ -27,6 +28,10 @@ export const jobPostDetailText = (jobPost: _temporaryJobPost | _jobPost): string
 <b>Location:</b> ${location}
 <b>Sector:</b> ${sector.name}
 ${employeeCount ? "\n<b>Applicants Needed:</b>: " + employeeCount : ""}${salary ? "\n<b>Salary/Compensation:</b>: " + salary : ""}
+
+-----
+<b>How To Apply</b>
+${howToApply}
 `)
 }
 
@@ -73,6 +78,7 @@ export const privateDetailText = (user: _user) => {
 <b>Contact Information</b>
 <b>Email:</b> ${email ? email : ""}
 <b>Phone:</b> ${phone ? phone : ""}
+<b>Telegram:</b> <a href="tg://user?id=${telegram.chatID}">Contact</a>
 `)
 }
 

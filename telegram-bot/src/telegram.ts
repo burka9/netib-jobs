@@ -13,6 +13,7 @@ async function setWebhookURL() {
 	let origin: string
 
 	if (DEVELOPMENT) {
+		logger.debug(`dev: setting tunnel with ${TUNNEL}`)
 		origin = await tunnel[TUNNEL]()
 	} else {
 		origin = WEBHOOK.ORIGIN
@@ -20,8 +21,12 @@ async function setWebhookURL() {
 
 	webhook = origin.concat(WEBHOOK.HREF)
 
-	let result = await response('setWebhook', 'POST', { url: webhook })
-	logger.debug(result.data.description)
+	try {
+		let result = await response('setWebhook', 'POST', { url: webhook })
+		logger.debug(result.data.description)
+	} catch (err: any) {
+		throw err
+	}
 
 	logger.debug(`webhook url: ${webhook}`)
 }
@@ -32,7 +37,7 @@ export async function initializeBot(router: Router) {
 
 	try {
 		await setWebhookURL()
-	} catch(err: any) {
+	} catch (err: any) {
 		logger.info('failed to set webhook')
 		logger.error(err.toString())
 		return
@@ -41,7 +46,7 @@ export async function initializeBot(router: Router) {
 	// await incoming requests
 	router.post(WEBHOOK.HREF, async (req, res) => {
 		logger.debug(`incoming requeset`)
-		
+
 		if (res.locals.user) {
 			await controller(res.locals.user, req.body)
 		}

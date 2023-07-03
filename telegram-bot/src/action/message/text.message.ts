@@ -5,7 +5,7 @@ import { deleteMessage } from "../../response/message/text.message";
 import start from "./map.text/start";
 import addPersonalEmail from "./map.text/addPersonalEmail";
 import { addCity, addCompanyDescription, addCompanyEmail, addCompanyPhone, addCompanySize, addCompanyTitle, addCompanyWebsite, addCountry, addSector } from "./map.text/company.text/temporaryCompany";
-import { addTempJobDescription, addTempJobEmployeeCount, addTempJobLocation, addTempJobSalary, addTempJobSector, addTempJobTitle, addTempJobType } from "./map.text/post.job/temporaryJobPost";
+import { addTempHowToApply, addTempJobDescription, addTempJobEmployeeCount, addTempJobLocation, addTempJobSalary, addTempJobSector, addTempJobTitle, addTempJobType } from "./map.text/post.job/temporaryJobPost";
 import { DEVELOPMENT, TELEGRAM } from "../../common/env";
 import { postJobToDevGroup } from "../callback.query/map.data.action/post.job.action/confrimTempJobPostAction";
 
@@ -77,6 +77,9 @@ const defaultTextMessageAction = async (
 			break
 		case TelegramStep.TempJobLocation:
 			await addTempJobLocation(user, text, chat, message, update_id)
+			break
+		case TelegramStep.TempJobHowToApply:
+			await addTempHowToApply(user, text, chat, message, update_id)
 			break
 		default:
 			// dev post

@@ -1,13 +1,12 @@
 import { Chat, Message } from "node-telegram-bot-api";
 import { TelegramStep, _user } from "../../../../interface/api";
-import { isCancel } from "axios";
-import cancelButtonMessage from "../../../../response/common/cancel.button.message";
+import cancelButtonMessage, { isCancel } from "../../../../response/common/cancel.button.message";
 import { apiGetRequest, apiPostRequest } from "../../../../api";
 import { changeTelegramStep } from "../../../../response/common/telegramStep";
 import { cancelButtonMarkup, jobTypeMarkup, sectorKeyboardMarkup, skipAndCancelButtonMarkup } from "../../../../response/markup";
 import { sendTextMessage, sendTextMessageAndRemoveKeyboard } from "../../../../response/message/text.message";
 import { isSkip } from "../../../../response/common/skip.button.message";
-import { tempJobLocation, tempJobSalary } from "../../../../response/common";
+import { tempJobHowToApply, tempJobLocation, tempJobSalary } from "../../../../response/common";
 import { viewTempJobPost } from "../../../../response/common/job.message";
 
 export const addTempJobTitle = async (user: _user, text: string, chat: Chat, message: Message, update_id?: number) => {
@@ -133,16 +132,20 @@ export const addTempJobSalary = async (user: _user, text: string, chat: Chat, me
 export const addTempJobLocation = async (user: _user, text: string, chat: Chat, message: Message, update_id?: number) => {
 	if (isCancel(text)) return cancelButtonMessage(chat)
 
-	// if (isSkip(text)) {
-	// 	await sendTextMessageAndRemoveKeyboard({
-	// 		chat_id: chat.id,
-	// 		text: `Job location skipped`
-	// 	})
-
-	// 	// await changeTelegramStep(chat.id, TelegramStep.ViewTempJobPost)
-	// 	return viewTempJobPost(user, chat.id)
-	// } else {
 	let { success, message: responseMessage } = await apiPostRequest('temporary-job-post', chat.id, { location: text })
+
+	if (success) {
+		await changeTelegramStep(chat.id, TelegramStep.TempJobHowToApply)
+		user = (await apiGetRequest('user-info', chat.id)).user
+
+		await tempJobHowToApply(chat.id)
+	}
+}
+
+export const addTempHowToApply = async (user: _user, text: string, chat: Chat, message: Message, update_id?: number) => {
+	if (isCancel(text)) return cancelButtonMessage(chat)
+
+	let { success, message: responseMessage } = await apiPostRequest('temporary-job-post', chat.id, { howToApply: text })
 
 	if (success) {
 		await changeTelegramStep(chat.id, TelegramStep.ViewTempJobPost)

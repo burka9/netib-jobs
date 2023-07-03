@@ -46,6 +46,7 @@ export enum TelegramStep {
   TempJobCity = "TempJobCity",
 	TempJobLocation = "TempJobLocation",
   TempJobEmployeeCount = "TempJobEmployeeCount",
+	TempJobHowToApply = "TempJobHowToApply",
 	ViewTempJobPost = "ViewTempJobPost",
   ConfirmTempJobPost = "ConfirmTempJobPost",
 }
@@ -140,6 +141,7 @@ export interface _temporaryJobPost {
 	city: _city;
 	location: string;
 	employeeCount: number;
+	howToApply: string;
 	owner: _user;
 }
 
@@ -152,6 +154,8 @@ export interface _jobPost {
 	salary: number;
 	location: string;
 	employeeCount: number;
+	howToApply: string;
+	moderated: boolean;
 	company?: _company | null;
 	owner: _user;
 }

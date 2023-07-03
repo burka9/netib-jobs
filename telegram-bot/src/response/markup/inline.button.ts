@@ -43,7 +43,7 @@ export const DeclineTerms: InlineKeyboardButton = {
 }
 
 export const PostJob: InlineKeyboardButton = {
-	text: 'Post Jobs',
+	text: 'Post Job',
 	callback_data: 'post-job'
 }
 export const BackToPostJob: InlineKeyboardButton = {
@@ -115,30 +115,30 @@ export const DeleteCompany = (id: number): InlineKeyboardButton => ({
 	callback_data: `company-delete-${id}`
 })
 
-export const BackToMyCompany = {
+export const BackToMyCompany: InlineKeyboardButton = {
 	text: 'Back',
 	callback_data: 'my-company'
-} as InlineKeyboardButton
+}
 
-export const PostJobAsPrivate = {
+export const PostJobAsPrivate: InlineKeyboardButton = {
 	text: 'Private Client',
 	callback_data: 'post-job-as-private-client'
-} as InlineKeyboardButton
+}
 
-export const PostJobAsCompany = {
+export const PostJobAsCompany: InlineKeyboardButton = {
 	text: 'Company',
 	callback_data: 'post-job-as-company'
-} as InlineKeyboardButton
+}
 
-export const ConfrimTempJobPost = {
+export const ConfrimTempJobPost: InlineKeyboardButton = {
 	text: 'Confirm',
 	callback_data: 'confirm-temp-job-post'
-} as InlineKeyboardButton
+}
 
-export const CancelTempJobPost = {
+export const CancelTempJobPost: InlineKeyboardButton = {
 	text: 'Cancel',
 	callback_data: 'cancel-temp-job-post'
-} as InlineKeyboardButton
+}
 
 export const PostAsCompanyButton = (company: _company): InlineKeyboardButton => ({
 	text: company.name,
