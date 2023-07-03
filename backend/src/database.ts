@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { resolve } from "path";
 import { DataSource } from "typeorm";
 import { DATABASE, DEVELOPMENT } from "./common/env";
@@ -20,7 +21,7 @@ export const Database = new DataSource({
 	},
 	entities: [
 		DEVELOPMENT
-		? resolve("src/entity/*.entity.ts")
-		: resolve("dist/entity/*.entity.js")
+		? resolve("src/entity/**/*.entity.ts")
+		: resolve("dist/entity/**/*.entity.js")
 	],
 })

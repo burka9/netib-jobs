@@ -38,6 +38,7 @@ export enum TelegramStep {
   TempJobCity = "TempJobCity",
   TempJobLocation = "TempJobLocation",
   TempJobEmployeeCount = "TempJobEmployeeCount",
+  TempJobHowToApply = "TempJobHowToApply",
   ViewTempJobPost = "ViewTempJobPost",
   ConfirmTempJobPost = "ConfirmTempJobPost",
 }

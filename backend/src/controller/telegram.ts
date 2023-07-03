@@ -362,7 +362,7 @@ class telegramController {
 	async temporaryJobPost(req: Request, res: Response) {
 		logger.debug(`temporary job post request: ${req.url}`)
 		const user = res.locals.user as User
-		const { city, companyId, country, description, employeeCount, salary, sector, title, type, location } = req.body
+		const { city, companyId, country, description, employeeCount, salary, sector, title, type, location, howToApply } = req.body
 
 		if (title) user.temporaryJobPost.title = title
 		if (description) user.temporaryJobPost.description = description
@@ -401,6 +401,11 @@ class telegramController {
 		if (employeeCount && !isNaN(employeeCount)) user.temporaryJobPost.employeeCount = employeeCount
 		if (salary && !isNaN(salary)) user.temporaryJobPost.salary = salary
 
+		if (howToApply) {
+			// implement contact method
+			user.temporaryJobPost.howToApply = howToApply
+		}
+		
 		await TemporaryJobPostRepo.save(user.temporaryJobPost)
 
 		goodRequest(res)
@@ -424,6 +429,7 @@ class telegramController {
 		newJobPost.sector = user.temporaryJobPost.sector
 		newJobPost.title = user.temporaryJobPost.title
 		newJobPost.type = user.temporaryJobPost.type
+		newJobPost.howToApply = user.temporaryJobPost.howToApply
 
 		user.temporaryJobPost = {
 			// @ts-ignore
@@ -446,6 +452,8 @@ class telegramController {
 			title: null,
 			// @ts-ignore
 			type: null,
+			// @ts-ignore
+			howToApply: null,
 		}
 
 		await JobPostRepo.save(newJobPost)

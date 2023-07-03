@@ -35,22 +35,10 @@ app.use(errorHandler)
 
 
 
-// database configuration
-Database.initialize()
-	.then(() => {
-		logger.info('database connected')
-		__dev__()
-	})
-	.catch(err => {
-		logger.error(err.toString())
-		logger.error('database connection failed')
-	})
-
-
-
-
 
 // server configuration
+const server = createServer(app)
+
 const SERVER_CALLBACK = () => {
 	logger.info(`server started `)
 	logger.debug(`listening on ${SERVER.HOST}:${SERVER.PORT}`)
@@ -58,16 +46,31 @@ const SERVER_CALLBACK = () => {
 	routes.forEach(route => logger.info(`Route configured: ${route.name}`))
 }
 
-const server = createServer(app)
-server
-	.listen(SERVER.PORT, SERVER.HOST, SERVER_CALLBACK)
-	.on('error', (err: any) => {
-		if (err.code === 'EADDRINUSE') {
-			logger.info('Address in use, retrying...')
-			setTimeout(() => {
-				server.close()
-				SERVER.PORT++
-				server.listen(SERVER.PORT, SERVER.HOST)
-			}, 1000)
-		}
+const SERVER_ERROR = (err: any) => {
+	if (err.code === 'EADDRINUSE') {
+		logger.info('Address in use, retrying...')
+		setTimeout(() => {
+			server.close()
+			SERVER.PORT++
+			server.listen(SERVER.PORT, SERVER.HOST)
+		}, 1000)
+	}
+}
+
+
+
+// database configuration
+Database.initialize()
+	.then(() => {
+		logger.info('database connected')
+
+		server
+			.listen(SERVER.PORT, SERVER.HOST, SERVER_CALLBACK)
+			.on('error', SERVER_ERROR)
+
+		__dev__()
+	})
+	.catch(err => {
+		logger.error(err.toString())
+		logger.error('database connection failed')
 	})

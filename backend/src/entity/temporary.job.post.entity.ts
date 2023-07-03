@@ -42,6 +42,9 @@ export class TemporaryJobPost {
 	@Column({ nullable: true })
 	employeeCount: number;
 
+	@Column("text", { nullable: true })
+	howToApply: string;
+
 	@OneToOne(() => User)
 	@JoinColumn()
 	owner: User;

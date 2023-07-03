@@ -1,4 +1,3 @@
-import { InsertResult } from "typeorm"
 import logger from "./common/logger"
 import { Database } from "./database"
 import { Country } from "./entity/country.entity"

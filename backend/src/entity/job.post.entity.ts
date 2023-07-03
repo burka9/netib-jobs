@@ -40,8 +40,16 @@ export class JobPost {
 	@Column({ nullable: true })
 	employeeCount: number;
 
+	@Column("text", { nullable: true })
+	howToApply: string;
+
 	@ManyToOne(() => Company, company => company.jobPosts)
 	company?: Company | null;
+
+	@Column("bool", {
+		default: false
+	})
+	moderated: boolean;
 
 	// @Column()
 	// companyName: string;
