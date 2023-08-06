@@ -54,3 +54,8 @@ export const DATABASE = {
 	SYNC: process.env.DB_SYNCHRONIZE === 'true',
 	DROP_SCHEMA: process.env.DB_DROP_SCHEMA === 'true' && DEVELOPMENT,
 }
+
+export const KEY = {
+	PRIVATE: process.env.PRIVATE_KEY || "",
+	PUBLIC: process.env.PUBLIC_KEY || "",
+}
