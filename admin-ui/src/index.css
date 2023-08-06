@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+body {
+  @apply bg-light text-dark h-screen w-screen
+}
+
+#root {
+  @apply h-full w-full
+}
+
+h1, h2, h3, h4, h5, h6, p, button, a {
+  @apply text-dark
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply uppercase font-bold
+}
+
+h1 {
+  @apply text-5xl
+}
+h2 {
+  @apply text-4xl
+}
+h3 {
+  @apply text-3xl
+}
+h4 {
+  @apply text-2xl
+}
+h5 {
+  @apply text-xl
+}
+h6 {
+  @apply text-lg
+}
+
+button {
+  @apply bg-dark text-light border-1 p-1 px-3 m-1 my-2 transition-all outline-none rounded
+    hover:bg-light hover:text-dark hover:border-dark
+    disabled:bg-dark-mid disabled:cursor-not-allowed
+    disabled:hover:text-light disabled:hover:border-light
+}
+
+input, select {
+  @apply bg-transparent m-1 my-2 p-1 px-2 border-1 border-dark/30 rounded outline-none
+    focus:bg-gray-100 focus:shadow-sm
+    disabled:opacity-50 disabled:cursor-not-allowed
+}
+
+select {
+}
+
+.centered, .centered-col {
+  @apply flex items-center justify-center h-full
+}
+
+.centered-col {
+  @apply flex-col
+}
