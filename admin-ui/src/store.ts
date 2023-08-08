@@ -1,8 +1,8 @@
 import Axios from "axios"
 
 export const axios = Axios.create({
-	baseURL: "http://localhost:3000",
-	// baseURL: "https://backend.netibjobs.com",
+	// baseURL: "http://localhost:3000",
+	baseURL: "https://backend.netibjobs.com",
 })
 
 export interface JobPost {
