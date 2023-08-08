@@ -5,6 +5,7 @@ import JobPosts from "./JobPosts"
 import Loading from "./Loading"
 import { axios } from "../store"
 import Sector from "./Sector"
+import Country from "./Country"
 
 const Home = () => {
 	const navigate = useNavigate()
@@ -38,6 +39,7 @@ const Home = () => {
 			<Routes location={location}>
 				<Route path="/" element={<JobPosts axios={axios} />} />
 				<Route path="/sector" element={<Sector axios={axios} />} />
+				<Route path="/country" element={<Country axios={axios} />} />
 			</Routes>
 		</div>
 	)

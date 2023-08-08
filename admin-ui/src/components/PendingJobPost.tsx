@@ -1,10 +1,14 @@
+import { AxiosInstance } from "axios";
 import { JobPost } from "../store";
 
 type MyProp = {
+	axios?: AxiosInstance;
 	jobPost: JobPost;
+	decline: (id: number) => void;
+	accept: (id: number) => void;
 }
 
-const PendingJobPost = ({ jobPost }: MyProp) => {
+const PendingJobPost = ({ jobPost, accept, decline }: MyProp) => {
 	return (
 		<div className="flex flex-col mb-5">
 			<div className="m-2 p-3 px-5 shadow-md bg-gray-300 flex flex-col max-w-[465px]">
@@ -40,8 +44,8 @@ const PendingJobPost = ({ jobPost }: MyProp) => {
 				</div>
 			</div>
 			<div className="flex justify-center">
-				<button className="bg-green-500 shadow border-green-500">Accept</button>
-				<button className="bg-red-500 shadow border-red-500">Decline</button>
+				<button className="bg-green-500 shadow border-green-500" onClick={() => accept(Number(jobPost.id))}>Accept</button>
+				<button className="bg-red-500 shadow border-red-500" onClick={() => decline(Number(jobPost.id))}>Decline</button>
 			</div>
 		</div>
 	)

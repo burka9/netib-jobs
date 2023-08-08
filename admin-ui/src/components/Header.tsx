@@ -9,6 +9,12 @@ type MyProp = {
 const Header = ({ axios, setLocation }: MyProp) => {
 	const navigate = useNavigate()
 
+	const links = [
+		{ name: "Home", path: "/home/" },
+		{ name: "Sector", path: "/home/sector" },
+		{ name: "Country", path: "/home/country" },
+	]
+
 	const logout = () => {
 		axios.get("/admin/logout")
 			.then(response => {
@@ -25,9 +31,7 @@ const Header = ({ axios, setLocation }: MyProp) => {
 		<div className="header flex items-center bg-dark p-4 px-8">
 			<h4 className="text-light">Dashboard</h4>
 			<div className="flex grow justify-center items-center">
-				<button onClick={() => setLocation("/home/")} className="rounded-none mx-4">Home</button>
-				<button onClick={() => setLocation("/home/sector")} className="rounded-none mx-4">Sector</button>
-				<button onClick={() => setLocation("/home/country")} className="rounded-none mx-4">Country</button>
+				{links.map((link, index) => <button key={index} onClick={() => setLocation(link.path)} className="rounded-none mx-4 border-0">{link.name}</button>)}
 			</div>
 			<button onClick={logout}>Logout</button>
 		</div>
