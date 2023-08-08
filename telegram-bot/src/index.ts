@@ -1,16 +1,19 @@
 import { createServer } from "http"
 import express, { Router } from "express"
+import "express-async-errors"
 import helmet from "helmet"
 import cors from "cors"
 import morgan from "morgan"
 import logger from "./common/logger"
-import { ENVIRONMENT, SERVER, TELEGRAM, WEBHOOK } from "./common/env"
+import { ENVIRONMENT, SERVER  } from "./common/env"
 import { errorHandler, getUserInfo } from "./common/middleware"
 import { initializeBot } from "./telegram"
+import adminRoute from "./admin.route"
 
 
 const app = express()
 const router = Router()
+const adminRouter = Router()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -24,6 +27,7 @@ app.use(morgan('combined', {
 	}
 }))
 
+app.use('/admin', adminRouter)
 app.use(errorHandler)
 app.use(getUserInfo)
 app.use('/', router)
@@ -35,6 +39,7 @@ const SERVER_CALLBACK = () => {
 	logger.debug(`listening on ${SERVER.HOST}:${SERVER.PORT}`)
 
 	initializeBot(router)
+	adminRoute(adminRouter)
 }
 
 const server = createServer(app)

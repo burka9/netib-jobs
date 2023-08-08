@@ -1,10 +1,10 @@
-import axios from "axios";
 import { Router } from "express";
 import { DEVELOPMENT, TUNNEL, WEBHOOK } from "./common/env";
 import logger from "./common/logger";
 import controller from "./controller";
 import response from "./response";
 import tunnel from "./common/tunnel";
+import { _company } from "./interface/api";
 
 let webhook: string
 
@@ -43,9 +43,14 @@ export async function initializeBot(router: Router) {
 		return
 	}
 
+	// handle accepted job post
+	router.post("/admin/post-job-to-group", async (req, res) => {
+		
+	})
+
 	// await incoming requests
 	router.post(WEBHOOK.HREF, async (req, res) => {
-		logger.debug(`incoming requeset`)
+		logger.debug(`incoming request`)
 
 		if (res.locals.user) {
 			await controller(res.locals.user, req.body)

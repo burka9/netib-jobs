@@ -21,7 +21,7 @@ export default async (user: _user, from: User, callback_query: CallbackQuery, me
 
 			await welcomeMessage(from)
 
-			await postJobToDevGroup(from.id, jobPostId)
+			// await postJobToDevGroup(from.id, jobPostId)
 		}
 	}
 }
