@@ -30,11 +30,30 @@ export class AdminRoutes extends RouteConfig {
 			.post(checkSession, admin.addSector)
 			.put(checkSession, admin.updateSector)
 			.delete(checkSession, admin.deleteSector)
-			
+
 		// handle country list
-		
+		this.router.route("/country")
+			.get(checkSession, admin.getCountry)
+			.post(checkSession, admin.addCountry)
+			.put(checkSession, admin.updateCountry)
+			.delete(checkSession, admin.deleteCountry)
+
+
+		// handle city list
+		this.router.route("/city")
+			.get(checkSession, admin.getCity)
+			.post(checkSession, admin.addCity)
+			.put(checkSession, admin.updateCity)
+			.delete(checkSession, admin.deleteCity)
+
 		// handle job posts
 		this.router.route("/pending-job-posts")
-			.get(admin.getPendingJobPosts)
+			.get(checkSession, admin.getPendingJobPosts)
+		
+		this.router.route("/accept-job-post")
+			.post(checkSession, admin.acceptJobPost)
+
+		this.router.route("/decline-job-post")
+			.post(checkSession, admin.declineJobPost)
 	}
 }

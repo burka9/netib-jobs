@@ -59,3 +59,7 @@ export const KEY = {
 	PRIVATE: process.env.PRIVATE_KEY || "",
 	PUBLIC: process.env.PUBLIC_KEY || "",
 }
+
+export const TELEGRAM = {
+	HANDLER_URL: process.env.TELEGRAM_HANDLER_URL || 'https://bot.netibjobs.com',
+}

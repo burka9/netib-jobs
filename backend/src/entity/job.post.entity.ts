@@ -49,7 +49,21 @@ export class JobPost {
 	@Column("bool", {
 		default: false
 	})
-	moderated: boolean;
+	accepted: boolean;
+
+	@Column("bool", {
+		default: false
+	})
+	declined: boolean;
+
+	@Column({ nullable: true })
+	messageId: string;
+
+	@Column({ nullable: true })
+	chatId: string;
+
+	@Column({ nullable: true })
+	postDate: Date;
 
 	// @Column()
 	// companyName: string;

@@ -11,7 +11,7 @@ export class City {
 	@Column({ unique: true })
 	name: string;
 
-	@ManyToOne(() => Country, country => country.cities)
+	@ManyToOne(() => Country, country => country.cities, { onDelete: "CASCADE" })
 	country: Country;
 
 	@OneToMany(() => TemporaryCompany, temporaryCompany => temporaryCompany.sector)
