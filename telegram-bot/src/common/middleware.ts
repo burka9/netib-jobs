@@ -3,7 +3,7 @@ import logger from "./logger"
 import { apiGetRequest, apiPostRequest } from "../api"
 import { Update } from "node-telegram-bot-api"
 
-export async function errorHandler(error: Error, req: Request, res: Response, next: NextFunction) {
+export function errorHandler(error: Error, req: Request, res: Response, next: NextFunction) {
 	logger.error(error.message)
 	if (error.name === 'QueryFailedError') {
 		return res.status(400).json({ message: 'Bad Request', code: (error as any).code })

@@ -1,5 +1,6 @@
 import { _user } from "../../interface/api"
 import { cancelButtonMarkup, locationKeyboardMarkup, skipAndCancelButtonMarkup } from "../markup"
+import { HowToApplyInlineKeyboard } from "../markup/inline.keyboard"
 import { sendTextMessage } from "../message/text.message"
 
 export const sendValidEmail = async (
@@ -54,7 +55,14 @@ export const tempJobLocation = async (chat_id: number) => sendTextMessage({
 
 export const tempJobHowToApply = async (chat_id: number) => sendTextMessage({
 	chat_id,
-	text: 'How to apply?\n\nTell applicants how they should contact you. Send a google form link (if any)?\n\n\nApplicants can contact you on directly on telegram using your phone number.',
+	text: `How to apply?
+	
+Tell applicants how they should apply to the job. You can also send a google form link (if any)?
+
+
+(For private clients only)
+Applicants can contact you on directly on telegram using your phone number.
+`,
 	parse_mode: 'HTML',
-	reply_markup: cancelButtonMarkup
+	reply_markup: skipAndCancelButtonMarkup
 })

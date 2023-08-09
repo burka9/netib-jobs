@@ -53,6 +53,10 @@ export enum TelegramStep {
 
 export enum JobType {
 	FullTime = "FullTime",
+	PartTime = "PartTime",
+	Contract = "Contract",
+	Internship = "Internship",
+	Temporary = "Temporary",
 	Remote = "Remote"
 }
 

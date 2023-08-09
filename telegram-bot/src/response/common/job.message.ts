@@ -19,19 +19,19 @@ export const jobPostDetailText = (jobPost: _temporaryJobPost | _jobPost): string
 		type
 	} = jobPost
 
+	const howToApplyText = `-----
+<b>How To Apply</b>
+${howToApply}`
+
 	return (
-`<b>Job Title:</b> ${title}
+		`<b>Job Title:</b> ${title}
 
 <b>Job Description:</b> ${description}
 
 <b>Job Type:</b> ${type}
 <b>Location:</b> ${location}
 <b>Sector:</b> ${sector.name}
-${employeeCount ? "\n<b>Applicants Needed:</b>: " + employeeCount : ""}${salary ? "\n<b>Salary/Compensation:</b>: " + salary : ""}
-
------
-<b>How To Apply</b>
-${howToApply}
+${employeeCount ? "\n<b>Applicants Needed:</b>: " + employeeCount : ""}${salary ? "\n<b>Salary/Compensation:</b>: " + salary : ""}${howToApply !== null ? "\n".concat(howToApplyText) : ""}
 `)
 }
 
@@ -49,7 +49,7 @@ export const shortCompanyDetailText = (company: _company | _temporaryCompany) =>
 	} = company
 
 	return (
-`Company details
+		`Company details
 
 <b>Name:</b> ${name}
 
@@ -73,7 +73,7 @@ export const privateDetailText = (user: _user) => {
 	} = user
 
 	return (
-`Private Client
+		`Private Client
 
 <b>Contact Information</b>
 <b>Email:</b> ${email ? email : ""}
@@ -84,9 +84,9 @@ export const privateDetailText = (user: _user) => {
 
 export const viewTempJobPost = async (user: _user, chat_id: number) => {
 	const company = user.companies.find(company => company.id === user.temporaryJobPost.companyId)
-	
+
 	const text = `${jobPostDetailText(user.temporaryJobPost)}
-----
+-----
 ${company ? shortCompanyDetailText(company) : privateDetailText(user)}
 `
 

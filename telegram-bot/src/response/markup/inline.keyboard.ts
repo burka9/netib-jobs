@@ -32,45 +32,45 @@ import { ViewJobsFromTelegram } from "./inline.button";
 import { ViewJobsFromWebsite } from "./inline.button";
 import { _user } from "../../interface/api";
 
-export const mainMenuInlineKeyboard = {
+export const mainMenuInlineKeyboard: InlineKeyboardMarkup = {
 	inline_keyboard: [
 		[
 			ViewJobsMainMenu,
 			MyJobsMainMenu
 		]
 	]
-} as InlineKeyboardMarkup
+}
 
-export const viewJobsInlineKeyboard = {
+export const viewJobsInlineKeyboard: InlineKeyboardMarkup = {
 	inline_keyboard: [
 		[ViewJobsFromTelegram],
 		[ViewJobsFromWebsite],
 		[MainMenu]
 	]
-} as InlineKeyboardMarkup
+}
 
-export const termsAndConditionInlineKeyboard = {
+export const termsAndConditionInlineKeyboard: InlineKeyboardMarkup = {
 	inline_keyboard: [
 		[AcceptTerms, DeclineTerms]
 	]
-} as InlineKeyboardMarkup
+}
 
-export const myJobsInlineKeyboard = {
+export const myJobsInlineKeyboard: InlineKeyboardMarkup = {
 	inline_keyboard: [
 		[PostJob, MyCompany],
 		// [AcceptedJobs, PendingJobs],
 		// [DeclinedJobs, MainMenu]
 		[MainMenu]
 	]
-} as InlineKeyboardMarkup
+}
 
-export const sharePersoanlEmailInlineKeyboard = {
+export const sharePersoanlEmailInlineKeyboard: InlineKeyboardMarkup = {
 	inline_keyboard: [
 		[MainMenu]
 	]
-} as InlineKeyboardMarkup
+}
 
-export const MyCompanyInlineKeyboard = (user: _user) => {
+export const MyCompanyInlineKeyboard = (user: _user): InlineKeyboardMarkup | undefined => {
 	if (!user) return
 	
 	const companies = user.companies.map(u => [CompanyButton(u.id, u.name)])
@@ -87,16 +87,16 @@ export const MyCompanyInlineKeyboard = (user: _user) => {
 		[BackToMyJobs, MainMenu]
 	)
 	
-	return { inline_keyboard } as InlineKeyboardMarkup
+	return { inline_keyboard }
 }
 
-export const ViewTemporaryCompanyInlineKeyboard = {
+export const ViewTemporaryCompanyInlineKeyboard: InlineKeyboardMarkup = {
 	inline_keyboard: [
 		// [ConfirmTemporaryCompany, EditTemporaryCompany],
 		[ConfirmTemporaryCompany],
 		[CancelTemporaryCompany]
 	]
-} as InlineKeyboardMarkup
+}
 
 export const ViewCompanyInlineKeyboard = (id: number): InlineKeyboardMarkup => ({
 	inline_keyboard: [
@@ -122,20 +122,20 @@ export const CancelEditCompanyAttributeInlineKeyboard = (id: number): InlineKeyb
 	]
 })
 
-export const HowToPostJobInlineKeyboard = {
+export const HowToPostJobInlineKeyboard: InlineKeyboardMarkup = {
 	inline_keyboard: [
 		// private client - company
 		// back - main menu
 		[PostJobAsPrivate, PostJobAsCompany],
 		[BackToMyJobs, MainMenu]
 	]
-} as InlineKeyboardMarkup
+}
 
-export const ViewTemporaryJobPostInlineKeyboard = {
+export const ViewTemporaryJobPostInlineKeyboard: InlineKeyboardMarkup = {
 	inline_keyboard: [
 		[ConfrimTempJobPost, CancelTempJobPost],
 	]
-} as InlineKeyboardMarkup
+}
 
 export const PostAsCompanyInlineKeyboard = (user: _user): InlineKeyboardMarkup => {
 	const markup: InlineKeyboardMarkup = {
@@ -149,4 +149,10 @@ export const PostAsCompanyInlineKeyboard = (user: _user): InlineKeyboardMarkup =
 	)
 
 	return markup
+}
+
+export const HowToApplyInlineKeyboard = {
+	inline_keyboard: [
+		[]
+	]
 }

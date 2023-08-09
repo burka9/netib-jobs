@@ -2,7 +2,7 @@ import { KeyboardButton, ReplyKeyboardMarkup } from "node-telegram-bot-api";
 import { apiGetRequest } from "../../api";
 import { EmployeeCount, JobType, _city, _country, _sector } from "../../interface/api";
 
-export const sharePhoneNumberMarkup = {
+export const sharePhoneNumberMarkup: ReplyKeyboardMarkup = {
 	one_time_keyboard: true,
 	resize_keyboard: true,
 	keyboard: [
@@ -11,9 +11,9 @@ export const sharePhoneNumberMarkup = {
 			request_contact: true
 		} as KeyboardButton]
 	]
-} as ReplyKeyboardMarkup
+}
 
-export const cancelButtonMarkup = {
+export const cancelButtonMarkup: ReplyKeyboardMarkup = {
 	one_time_keyboard: true,
 	resize_keyboard: true,
 	keyboard: [
@@ -21,9 +21,9 @@ export const cancelButtonMarkup = {
 			{ text: 'Cancel' }
 		]
 	]
-} as ReplyKeyboardMarkup
+}
 
-export const skipButtonMarkup = {
+export const skipButtonMarkup: ReplyKeyboardMarkup = {
 	one_time_keyboard: true,
 	resize_keyboard: true,
 	keyboard: [
@@ -31,9 +31,9 @@ export const skipButtonMarkup = {
 			{ text: 'Skip' }
 		]
 	]
-} as ReplyKeyboardMarkup
+}
 
-export const skipAndCancelButtonMarkup = {
+export const skipAndCancelButtonMarkup: ReplyKeyboardMarkup = {
 	one_time_keyboard: true,
 	resize_keyboard: true,
 	keyboard: [
@@ -42,7 +42,7 @@ export const skipAndCancelButtonMarkup = {
 			{ text: 'Cancel' },
 		]
 	]
-} as ReplyKeyboardMarkup
+}
 
 const populateKeyboardList = (list: any[], includeCancel = true, includeSkip = false): KeyboardButton[][] => {
 	const keyboard: KeyboardButton[][] = []
@@ -135,6 +135,10 @@ export const jobTypeMarkup = (): ReplyKeyboardMarkup => {
 			{ text: item }
 		])
 	}
+
+	markup.keyboard.push([
+		{ text: 'Cancel' }
+	])
 
 	return markup
 }
