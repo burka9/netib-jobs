@@ -1,18 +1,18 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Country } from "./country.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { City } from "./city.entity";
 import { TemporaryCompany } from "./temporary.company.entity";
 import { Company } from "./company.entity";
 
 @Entity()
-export class City {
+export class Country {
 	@PrimaryGeneratedColumn()
 	id: number;
 
 	@Column({ unique: true })
 	name: string;
 
-	@ManyToOne(() => Country, country => country.cities, { onDelete: "CASCADE" })
-	country: Country;
+	@OneToMany(() => City, city => city.country)
+	cities: City[];
 
 	@OneToMany(() => TemporaryCompany, temporaryCompany => temporaryCompany.sector)
 	temporaryCompanies: TemporaryCompany[];
