@@ -107,7 +107,7 @@ class AdminController {
 			"jobPosts",
 			await jobPostRepo.find({
 				where: { accepted: false, declined: false },
-				relations: ["sector"]
+				relations: ["sector", "owner", "owner.telegram", "company", "company.city", "company.city.country"]
 			})
 		])
 	}

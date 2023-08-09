@@ -14,8 +14,8 @@ import { Sector } from "../entity/sector.entity";
 import { Country } from "../entity/country.entity";
 import { City } from "../entity/city.entity";
 import { UserVariable } from "../entity/user.variable.entity";
-import { JobType, TemporaryJobPost } from "../entity/temporary.job.post.entity";
-import { JobPost } from "../entity/job.post.entity";
+import { TemporaryJobPost } from "../entity/temporary.job.post.entity";
+import { JobPost, JobType } from "../entity/job.post.entity";
 
 const UserRepo = Database.getRepository(User)
 const UserTelegramRepo = Database.getRepository(UserTelegram)

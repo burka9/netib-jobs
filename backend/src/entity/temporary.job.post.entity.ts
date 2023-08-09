@@ -1,13 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Sector } from "./sector.entity";
-import { City } from "./city.entity";
-import { Country } from "./country.entity";
 import { User } from "./user.entity";
-
-export enum JobType {
-	FullTime = "FullTime",
-	Remote = "Remote"
-}
+import { JobType } from "./job.post.entity";
 
 @Entity()
 export class TemporaryJobPost {
