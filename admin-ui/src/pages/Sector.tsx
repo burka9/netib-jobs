@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { AxiosInstance } from "axios"
 
-type Sector = {
+export type Sector = {
 	id: number;
 	name: string;
 	editing?: boolean;
